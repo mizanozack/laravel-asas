@@ -1,11 +1,15 @@
 @extends('layout.header')
 
+<body style="background-color:;"class="bg-success p-2 text-dark bg-opacity-10">
+
+
 <div class="container">
     <h1> <p class="fs-4"> Chart <span class="badge bg-secondary">New</span></h1>
     <h2> Listing </h2>
     <hr/>
 
-<a href="http://google.com" class="btn btn-success">Click Here</a>
+
+<a href="/" class="btn btn-success">Go to Front Page</a>
 
     <ul class="list-group">
         <li class="list-group-item">item 1</li>
@@ -30,7 +34,7 @@
             <th scope="col">NO</th>
             <th scope="col">Name</th>
             <th scope="col">updated_at</th>
-            <th scope="col">Last</th>
+            <th scope="col">is_complete</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +43,28 @@
             <th scope="row">{{ $key+1 }} </th>
             <td> {{ $listItem->name }}</td>
             <td> {{ $listItem->updated_at }}</td>
-            <td></td>
+            
+            <td>
+            <form method="post" action="{{ route('markComplete', $listItem->id) }}" accept-charser="UTF-8">
+                {{ csrf_field() }} {{ $listItem->is_complete }} 
+                @if($listItem->is_complete == '1')
+                </form>
+
+                <form action="{{url('jadual/'.$listItem->id) }}" method="post" class="d-inline"onsubmit="return confirm('delete data?')">
+                     @method('delete') 
+                     @csrf
+                     <button type="submit" class="btn btn-danger">Delete</button>
+                    
+
+                <script>
+           
+    });
+        </script>
+                @else
+                <button type="submit" class="btn btn-primary">Mark Complete</button>
+                @endif
+            </form>
+            </td>
             
             </tr>
             @endforeach
@@ -56,18 +81,9 @@
             </tr>
             @endforeach
             
-            <tr>
-            <th scope="row">2</th>
-            <td>updated_at</td>
-            <td></td>
-            <td></td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>john</td>
-            <td>@twitter</td>
-            </tr>
+
+           
+            <
         
         </tbody>
     </table>
