@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\models\ListItem;
 use App\models\Demo;
 
+
 class TodoListController extends Controller
 {
     public function index() {
-       return view('style', ['listItems' => Listitem::all()]);
+       return view('welcome', ['listItems' => Listitem::Where('is_complete',0)->get()]);
     }
 
     public function jadual() {
@@ -21,12 +22,16 @@ class TodoListController extends Controller
         'bilik bawah',
         'bilik atas'
       ];
-      // dd($data);
+      
       return view('jadual.table', $data);
     }
     
-    public function markComplete() {
-        return view('welcome', ['listItems' => Listitem::all()]);
+    public function markComplete($id) {
+      $listItem = ListItem::find($id);
+      $listItem->is_complete = 1;
+      $listItem->save();
+      return redirect('/jadual');
+      // return view('jadual', ['listItems' => Listitem::all()]);
     }
 
     public function saveItem(Request $request) {
@@ -43,4 +48,21 @@ class TodoListController extends Controller
       $data = Listitem::all();
       return $data;
     }
+
+
+    public function delete($id)
+     {
+
+      
+      DB::table('jadual')->where('id',$id )->delete();
+         return redirect('/jadual')->with('status', 'success delete!');
+
+     }
+
+
+
+
+
+
+
 }

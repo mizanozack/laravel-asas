@@ -56,5 +56,7 @@
  
         </div>
 
+        <hr>
+        <a href="/jadual" class="btn btn-primary">Go To Page Jadual</a>
     </body>
 </html>

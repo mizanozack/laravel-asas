@@ -20,7 +20,16 @@ use App\Http\Controllers\TodoListController;
 Route::get('/jadual', [TodoListController::class, 'jadual'] );
 
 
+Route::get('/', [TodoListController::class, 'index'] );
+
+
 Route::post('/saveItemRoute',[TodoListController::class, 'saveitem'])->name ('saveitem');
    
-Route::post('/markComplete/{id}',[TodoListController::class, 'markComplete'])->name ('markComplete');
+Route::post('/markCompleteRoute/{id}',[TodoListController::class, 'markComplete'])->name ('markComplete');
+
+Route::delete('jadual/{id}','TodoListController@delete');
+
+
+
+
 
